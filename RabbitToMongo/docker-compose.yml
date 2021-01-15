@@ -1,0 +1,22 @@
+#https://github.com/marcelmaatkamp/docker-rabbitmq-mongodb
+version: '3.7'
+services:
+
+    amqp2mongo1:
+        image: "marcelmaatkamp/rabbitmq-mongodb"
+        hostname: "amqp2mongo1"
+        environment:
+            AMQPHOST: 'amqp://rabbitmq:rabbitmq@rabbitmq1'
+            MONGODB: 'mongodb://mongo/FilRouge'
+            MONGOCOLLECTION: 'data'
+            TRANSLATECONTENT: 'true'
+        command: 'Client1'
+        tty: true
+        labels:
+            NAME: "amqp2mongo1"
+        networks:
+            - iot-labs
+        restart: always
+networks:
+    iot-labs:
+        external: true
